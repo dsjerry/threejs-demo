@@ -1,0 +1,51 @@
+{
+  "name": "threejs-learning-website",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:vercel": "vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,md}\""
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.1",
+    "@heroicons/react": "^2.2.0",
+    "@react-three/drei": "^9.96.1",
+    "@react-three/fiber": "^8.16.1",
+    "@react-three/postprocessing": "^3.0.4",
+    "clsx": "^2.1.0",
+    "gsap": "^3.12.5",
+    "leva": "^0.9.35",
+    "prismjs": "^1.29.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.22.3",
+    "shiki": "^1.0.0",
+    "tailwind-merge": "^2.2.2",
+    "three": "^0.162.0",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@monaco-editor/react": "^4.6.0",
+    "@types/prismjs": "^1.26.3",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@types/three": "^0.162.0",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.18",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "postcss": "^8.4.35",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.4.2",
+    "vite": "^6.0.0"
+  }
+}
