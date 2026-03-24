@@ -69,11 +69,11 @@ export default function ProgressTracker({ exampleKey, showOverall = false }: Pro
   const viewed = isViewed(exampleKey)
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2">
       {/* 查看状态 */}
       {viewed && (
-        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-800">
-          <EyeIcon className="w-4 h-4" />
+        <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-50/90 to-cyan-50/80 dark:from-blue-900/30 dark:to-cyan-900/25 text-blue-700 dark:text-blue-300 rounded-xl border border-blue-200/60 dark:border-blue-800/60 backdrop-blur-sm shadow-sm">
+          <EyeIcon className="w-3.5 h-3.5" />
           <span className="text-xs font-medium">已查看</span>
         </div>
       )}
@@ -81,16 +81,16 @@ export default function ProgressTracker({ exampleKey, showOverall = false }: Pro
       {/* 完成状态切换按钮 */}
       <button
         onClick={() => completed ? unmarkAsCompleted(exampleKey) : markAsCompleted(exampleKey)}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 transform hover:scale-105 ${
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 transform hover:scale-105 active:scale-95 ${
           completed
-            ? 'bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800 shadow-sm'
-            : 'bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600'
+            ? 'bg-gradient-to-r from-green-50/90 to-emerald-50/80 dark:from-green-900/30 dark:to-emerald-900/25 text-green-700 dark:text-green-200 border border-green-200/60 dark:border-green-800/60 shadow-sm'
+            : 'bg-gradient-to-r from-white/80 to-white/60 dark:from-gray-800/60 dark:to-gray-700/50 text-gray-600 dark:text-gray-300 border border-gray-200/60 dark:border-gray-700/60 hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-700 dark:hover:text-primary-200 shadow-sm hover:shadow-md'
         }`}
       >
         {completed ? (
-          <CheckCircleIconSolid className="w-4 h-4" />
+          <CheckCircleIconSolid className="w-3.5 h-3.5" />
         ) : (
-          <CheckCircleIcon className="w-4 h-4" />
+          <CheckCircleIcon className="w-3.5 h-3.5" />
         )}
         <span>{completed ? '已完成' : '标记完成'}</span>
       </button>

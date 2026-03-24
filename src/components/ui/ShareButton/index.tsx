@@ -52,42 +52,42 @@ export default function ShareButton({ exampleKey, code }: ShareButtonProps) {
     <div className="relative">
       <button
         onClick={() => setShowShareMenu(!showShareMenu)}
-        className="btn-primary hover-lift flex items-center gap-2 px-4 py-2 text-sm"
+        className="btn-primary flex items-center gap-2 px-4 py-2 text-sm"
       >
         <ShareIcon className="w-4 h-4" />
         <span>分享</span>
       </button>
 
       {showShareMenu && (
-        <div className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-          <div className="py-2">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleShare}
-                className="btn-ghost hover-lift flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 text-primary-700 dark:text-primary-300 rounded-xl text-sm font-medium border border-primary-200 dark:border-primary-800 shadow-sm hover:shadow-md"
-                title="分享示例"
-              >
-                <ShareIcon className="w-4 h-4" />
-                <span>分享</span>
-              </button>
-              
-              <button
-                onClick={handleCopyCode}
-                className={`btn-ghost hover-lift flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border shadow-sm hover:shadow-md transition-all duration-200 ${
-                  copied 
-                    ? 'bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800'
-                    : 'bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600'
-                }`}
-                title="复制代码"
-              >
-                {copied ? (
-                  <CheckIcon className="w-4 h-4 animate-bounce-gentle" />
-                ) : (
-                  <ClipboardIcon className="w-4 h-4" />
-                )}
-                <span>{copied ? '已复制' : '复制'}</span>
-              </button>
-            </div>
+        <div className="absolute right-0 top-full mt-2 w-48 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-xl shadow-xl border border-gray-200/60 dark:border-gray-700/60 z-50 animate-fade-in-scale overflow-hidden">
+          <div className="p-2 space-y-1">
+            <button
+              onClick={handleShare}
+              className="w-full btn-ghost hover-lift flex items-center gap-2 px-3 py-2.5 text-sm font-medium"
+              title="分享示例"
+            >
+              <ShareIcon className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+              <span>分享链接</span>
+            </button>
+            
+            <div className="h-px bg-gray-200/50 dark:bg-gray-700/50 my-1" />
+
+            <button
+              onClick={handleCopyCode}
+              className={`w-full btn-ghost hover-lift flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                copied 
+                  ? 'text-green-700 dark:text-green-300 bg-green-50/70 dark:bg-green-900/20'
+                  : 'text-gray-700 dark:text-gray-200'
+              }`}
+              title="复制代码"
+            >
+              {copied ? (
+                <CheckIcon className="w-4 h-4 animate-bounce-gentle" />
+              ) : (
+                <ClipboardIcon className="w-4 h-4" />
+              )}
+              <span>{copied ? '已复制到剪贴板' : '复制代码'}</span>
+            </button>
           </div>
         </div>
       )}
