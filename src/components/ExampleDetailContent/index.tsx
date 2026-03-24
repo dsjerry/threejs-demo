@@ -65,6 +65,7 @@ export default function ExampleDetailContent({ exampleKey }: ExampleDetailConten
   const example = examplesData[exampleKey]
   const [code, setCode] = useState(example?.code || '')
   const [controlParams, setControlParams] = useState<any>({})
+  const [readOnly, setReadOnly] = useState(false)
   const { markAsViewed } = useProgress()
 
   // 标记示例为已查看
@@ -159,15 +160,37 @@ export default function ExampleDetailContent({ exampleKey }: ExampleDetailConten
         </div>
 
         {/* 代码编辑区域 */}
-        <div className="w-full lg:w-1/2 card-elevated flex flex-col min-h-96 lg:min-h-0 overflow-hidden">
-          <div className="px-4 py-3 border-b border-gray-200/40 dark:border-gray-700/40 flex items-center justify-between bg-gradient-to-r from-white/70 to-white/40 dark:from-slate-800/70 dark:to-slate-700/40 backdrop-blur-xl">
+        <div className={`w-full lg:w-1/2 flex flex-col min-h-96 lg:min-h-0 overflow-hidden ${readOnly ? 'card-elevated' : 'relative bg-white dark:bg-gray-800 border border-gray-200/80 dark:border-gray-700/80 rounded-2xl shadow-xl'}`}>
+          <div className="px-4 py-3 border-b border-gray-200/40 dark:border-gray-700/40 flex items-center justify-between bg-gradient-to-r from-white/70 to-white/40 dark:from-slate-800/70 dark:to-slate-700/40 backdrop-blur-xl relative z-10">
             <h2 className="text-sm font-medium flex items-center gap-2 text-gray-700 dark:text-gray-300">
               <svg className="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
               代码
             </h2>
-            <ShareButton exampleKey={exampleKey} code={code} />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setReadOnly(!readOnly)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 border ${
+                  readOnly
+                    ? 'bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800'
+                    : 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800'
+                }`}
+                title={readOnly ? '当前只读，点击切换为可编辑' : '当前可编辑，点击切换为只读'}
+              >
+                {readOnly ? (
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                ) : (
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                  </svg>
+                )}
+                {readOnly ? '只读' : '编辑'}
+              </button>
+              <ShareButton exampleKey={exampleKey} code={code} />
+            </div>
           </div>
           
           <div className="flex-1 min-h-0 code-editor-container">
@@ -176,6 +199,7 @@ export default function ExampleDetailContent({ exampleKey }: ExampleDetailConten
               onChange={(value) => setCode(value || '')}
               language="typescript"
               height="100%"
+              readOnly={readOnly}
             />
           </div>
         </div>
