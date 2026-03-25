@@ -1,5 +1,6 @@
 import { CheckCircleIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { CheckCircleIcon as CheckCircleIconSolid } from '@heroicons/react/24/solid'
+import { useTranslation } from 'react-i18next'
 import { useProgress } from '../../../hooks/useProgress'
 
 interface ProgressTrackerProps {
@@ -8,6 +9,7 @@ interface ProgressTrackerProps {
 }
 
 export default function ProgressTracker({ exampleKey, showOverall = false }: ProgressTrackerProps) {
+  const { t } = useTranslation()
   const { progress, markAsCompleted, unmarkAsCompleted, isCompleted, isViewed } = useProgress()
 
   if (showOverall) {
@@ -20,14 +22,14 @@ export default function ProgressTracker({ exampleKey, showOverall = false }: Pro
             </svg>
           </div>
           <h3 className="text-heading-3">
-            学习进度
+            {t('pages.progress.title')}
           </h3>
         </div>
         
         {/* 进度条 */}
         <div className="mb-6">
           <div className="flex justify-between text-caption mb-3">
-            <span>完成进度</span>
+            <span>{t('pages.progress.completionProgress')}</span>
             <span className="font-semibold text-primary-600 dark:text-primary-400">{progress.completionPercentage}%</span>
           </div>
           <div className="progress-bar h-3">
@@ -44,19 +46,19 @@ export default function ProgressTracker({ exampleKey, showOverall = false }: Pro
             <div className="text-2xl font-bold text-green-600 dark:text-green-400">
               {progress.completedExamples.size}
             </div>
-            <div className="text-caption text-green-700 dark:text-green-300">已完成</div>
+            <div className="text-caption text-green-700 dark:text-green-300">{t('pages.progress.completed')}</div>
           </div>
           <div className="text-center p-3 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-800">
             <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
               {progress.viewedExamples.size}
             </div>
-            <div className="text-caption text-blue-700 dark:text-blue-300">已查看</div>
+            <div className="text-caption text-blue-700 dark:text-blue-300">{t('pages.progress.viewed')}</div>
           </div>
           <div className="text-center p-3 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700">
             <div className="text-2xl font-bold text-gray-600 dark:text-gray-400">
               {progress.totalExamples}
             </div>
-            <div className="text-caption text-gray-700 dark:text-gray-300">总数</div>
+            <div className="text-caption text-gray-700 dark:text-gray-300">{t('pages.progress.total')}</div>
           </div>
         </div>
       </div>
@@ -74,7 +76,7 @@ export default function ProgressTracker({ exampleKey, showOverall = false }: Pro
       {viewed && (
         <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-50/90 to-cyan-50/80 dark:from-blue-900/30 dark:to-cyan-900/25 text-blue-700 dark:text-blue-300 rounded-xl border border-blue-200/60 dark:border-blue-800/60 backdrop-blur-sm shadow-sm">
           <EyeIcon className="w-3.5 h-3.5" />
-          <span className="text-xs font-medium">已查看</span>
+          <span className="text-xs font-medium">{t('progressTracker.viewed')}</span>
         </div>
       )}
 
@@ -92,7 +94,7 @@ export default function ProgressTracker({ exampleKey, showOverall = false }: Pro
         ) : (
           <CheckCircleIcon className="w-3.5 h-3.5" />
         )}
-        <span>{completed ? '已完成' : '标记完成'}</span>
+        <span>{completed ? t('progressTracker.completed') : t('progressTracker.markComplete')}</span>
       </button>
     </div>
   )

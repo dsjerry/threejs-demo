@@ -1,17 +1,24 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useTheme } from '../contexts/ThemeContext'
 import Logo from './ui/Logo'
 
 export default function Navigation() {
+  const { t, i18n } = useTranslation()
   const location = useLocation()
   const { theme, toggleTheme } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  const toggleLanguage = () => {
+    const nextLang = i18n.language === 'zh-CN' ? 'en' : 'zh-CN'
+    i18n.changeLanguage(nextLang)
+  }
+
   const navItems = [
-    { path: '/', label: '首页' },
-    { path: '/examples', label: '示例' },
-    { path: '/progress', label: '进度' },
+    { path: '/', label: t('nav.home') },
+    { path: '/examples', label: t('nav.examples') },
+    { path: '/progress', label: t('nav.progress') },
   ]
 
   return (
@@ -59,9 +66,19 @@ export default function Navigation() {
             </a>
             
             <button
+              onClick={toggleLanguage}
+              className="btn-icon"
+              aria-label={t('nav.toggleLanguage')}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+              </svg>
+            </button>
+
+            <button
               onClick={toggleTheme}
               className="btn-icon"
-              aria-label="切换主题"
+              aria-label={t('nav.toggleTheme')}
             >
               {theme === 'dark' ? (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,9 +95,18 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-3">
             <button
+              onClick={toggleLanguage}
+              className="btn-icon"
+              aria-label={t('nav.toggleLanguage')}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+              </svg>
+            </button>
+            <button
               onClick={toggleTheme}
               className="btn-icon"
-              aria-label="切换主题"
+              aria-label={t('nav.toggleTheme')}
             >
               {theme === 'dark' ? (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,7 +121,7 @@ export default function Navigation() {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="btn-icon"
-              aria-label="打开菜单"
+              aria-label={t('nav.openMenu')}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />

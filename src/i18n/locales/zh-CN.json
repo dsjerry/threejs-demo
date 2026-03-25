@@ -1,0 +1,237 @@
+{
+  "nav": {
+    "home": "首页",
+    "examples": "示例",
+    "progress": "进度",
+    "github": "GitHub",
+    "toggleTheme": "切换主题",
+    "toggleLanguage": "切换语言",
+    "openMenu": "打开菜单"
+  },
+  "common": {
+    "notFound": "示例未找到",
+    "notFoundDesc": "请检查URL或从左侧列表选择一个有效的示例",
+    "backToExamples": "返回示例",
+    "continue": "继续学习",
+    "completed": "已完成",
+    "viewed": "已查看",
+    "total": "总数"
+  },
+  "pages": {
+    "home": {
+      "title": "Three.js 学习平台",
+      "badge": "交互式示例 · 实时代码 · 进度追踪",
+      "subtitle": "从基础到进阶的 Three.js 学习平台，包含交互式示例和实时代码编辑",
+      "startLearning": "开始学习",
+      "threejsOfficial": "Three.js 官网",
+      "features": {
+        "progressive": {
+          "title": "渐进式学习",
+          "desc": "从基础几何体到复杂场景，循序渐进的学习路径"
+        },
+        "realtime": {
+          "title": "实时预览",
+          "desc": "在线编辑代码，实时查看 3D 效果，即时反馈学习成果"
+        },
+        "rich": {
+          "title": "丰富示例",
+          "desc": "涵盖材质、光照，动画，粒子等各个方面的完整示例"
+        }
+      },
+      "darkMode": "暗色模式支持",
+      "smoothAnimations": "更顺滑的动效",
+      "quickStart": "快速开始",
+      "whatIsThreejs": "Three.js 是什么？",
+      "threejsIntro": "Three.js 是一个基于 WebGL 的 JavaScript 3D 图形库，让在网页中创建和显示 3D 图形变得简单。它提供了丰富的 API 来处理几何体，材质，光照，动画等 3D 图形的各个方面。",
+      "benefits": {
+        "easyApi": "简单易用的 API",
+        "crossBrowser": "跨浏览器兼容",
+        "community": "活跃的社区支持"
+      },
+      "firstScene": "第一个 Three.js 场景"
+    },
+    "examples": {
+      "title": "Three.js 示例",
+      "clearSelection": "清空选择",
+      "selectPrompt": "选择一个示例",
+      "selectDesc": "从左侧列表中选择一个示例，即可同时查看 3D 预览与可编辑代码；也可以在进度页标记完成。",
+      "backToHome": "返回首页",
+      "viewProgress": "查看进度",
+      "tags": {
+        "preview": "预览",
+        "edit": "编辑",
+        "share": "分享",
+        "track": "追踪"
+      }
+    },
+    "progress": {
+      "title": "学习进度",
+      "subtitle": "追踪你的 Three.js 学习旅程",
+      "overall": "总体进度",
+      "overallDesc": "继续保持，你的学习进度正在累积",
+      "completion": "完成进度",
+      "completionProgress": "完成进度",
+      "categoryProgress": "分类进度",
+      "completed": "已完成",
+      "viewed": "已查看",
+      "total": "总数"
+    },
+    "detail": {
+      "code": "代码",
+      "readOnly": "只读",
+      "editing": "编辑",
+      "readOnlyTip": "当前只读，点击切换为可编辑",
+      "editingTip": "当前可编辑，点击切换为只读"
+    }
+  },
+  "categories": {
+    "basics": "基础示例",
+    "materials": "材质系统",
+    "lighting": "光照效果",
+    "animation": "动画效果",
+    "geometry": "几何体",
+    "effects": "后处理效果",
+    "interaction": "交互效果",
+    "shaders": "着色器",
+    "particles": "粒子效果",
+    "camera": "相机控制",
+    "models": "模型展示"
+  },
+  "search": {
+    "placeholder": "搜索示例...",
+    "all": "全部",
+    "found": "找到 {count} 个匹配的示例"
+  },
+  "tree": {
+    "title": "示例列表",
+    "hint": "点击分类展开，选择示例开始预览"
+  },
+  "share": {
+    "share": "分享",
+    "shareLink": "分享链接",
+    "copyCode": "复制代码",
+    "copied": "已复制到剪贴板",
+    "shareExample": "分享示例"
+  },
+  "progressTracker": {
+    "viewed": "已查看",
+    "markComplete": "标记完成",
+    "completed": "已完成"
+  },
+  "examples": {
+    "basics": {
+      "cube": {
+        "title": "旋转立方体",
+        "description": "创建一个简单的旋转立方体，学习基础的几何体，材质和动画"
+      },
+      "sphere": {
+        "title": "球体",
+        "description": "创建和渲染球体几何，学习不同的材质属性"
+      },
+      "plane": {
+        "title": "平面",
+        "description": "创建平面几何体，学习基础的平面渲染"
+      },
+      "materials": {
+        "title": "材质",
+        "description": "探索不同的材质类型和属性"
+      }
+    },
+    "lighting": {
+      "demo": {
+        "title": "光照演示",
+        "description": "学习不同类型光源的效果和配置方法"
+      },
+      "directional": {
+        "title": "方向光",
+        "description": "学习方向光的使用和阴影效果"
+      },
+      "point": {
+        "title": "点光源",
+        "description": "学习点光源的动态光照效果"
+      }
+    },
+    "animation": {
+      "demo": {
+        "title": "动画演示",
+        "description": "学习 Three.js 中的基础动画系统"
+      },
+      "movement": {
+        "title": "移动动画",
+        "description": "学习各种移动轨迹和路径动画"
+      },
+      "scale": {
+        "title": "缩放动画",
+        "description": "学习各种缩放和变形动画效果"
+      }
+    },
+    "materials": {
+      "texture": {
+        "title": "纹理贴图",
+        "description": "学习程序化纹理的创建和应用"
+      },
+      "glass": {
+        "title": "玻璃材质",
+        "description": "学习物理材质中的玻璃效果：透明度，折射率IOR，透射率等"
+      }
+    },
+    "particles": {
+      "rain": {
+        "title": "雨滴粒子",
+        "description": "创建逼真的雨滴粒子系统效果"
+      },
+      "stars": {
+        "title": "星空粒子",
+        "description": "创建美丽的星空和星云效果"
+      },
+      "fire": {
+        "title": "火焰粒子",
+        "description": "使用粒子系统创建逼真的火焰燃烧效果"
+      }
+    },
+    "models": {
+      "demo": {
+        "title": "3D模型展示",
+        "description": "展示复杂3D几何体组合和材质效果"
+      }
+    },
+    "effects": {
+      "bloom": {
+        "title": "辉光效果",
+        "description": "使用后处理创建美丽的辉光和发光效果"
+      },
+      "fog": {
+        "title": "雾效效果",
+        "description": "使用雾效创建深度感和大气氛围"
+      },
+      "depthOfField": {
+        "title": "景深效果",
+        "description": "使用后处理创建单反相机般的景深模糊效果"
+      }
+    },
+    "geometry": {
+      "torusKnot": {
+        "title": "环面扭结",
+        "description": "探索复杂的数学曲面几何体：环面扭结（TorusKnot）"
+      }
+    },
+    "interaction": {
+      "click": {
+        "title": "点击交互",
+        "description": "学习物体点击，悬停等交互效果的实现"
+      }
+    },
+    "shaders": {
+      "custom": {
+        "title": "自定义着色器",
+        "description": "使用 GLSL 编写自定义顶点和片元着色器创建波浪效果"
+      }
+    },
+    "camera": {
+      "controls": {
+        "title": "相机控制",
+        "description": "学习 OrbitControls 相机的旋转，缩放，平移操作"
+      }
+    }
+  }
+}

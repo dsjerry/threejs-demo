@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { examplesData } from '../data/examples'
+import { TOTAL_EXAMPLES } from '../data/examples'
 
 interface ProgressData {
   completedExamples: Set<string>
@@ -12,7 +12,7 @@ export function useProgress() {
   const [progress, setProgress] = useState<ProgressData>({
     completedExamples: new Set(),
     viewedExamples: new Set(),
-    totalExamples: Object.keys(examplesData).length,
+    totalExamples: TOTAL_EXAMPLES,
     completionPercentage: 0
   })
 
@@ -28,7 +28,7 @@ export function useProgress() {
           viewedExamples: new Set(parsed.viewedExamples || []),
           completionPercentage: calculateCompletionPercentage(
             new Set(parsed.completedExamples || []),
-            Object.keys(examplesData).length
+            TOTAL_EXAMPLES
           )
         }))
       } catch (error) {
@@ -111,7 +111,7 @@ export function useProgress() {
     const newProgress = {
       completedExamples: new Set<string>(),
       viewedExamples: new Set<string>(),
-      totalExamples: Object.keys(examplesData).length,
+      totalExamples: TOTAL_EXAMPLES,
       completionPercentage: 0
     }
     

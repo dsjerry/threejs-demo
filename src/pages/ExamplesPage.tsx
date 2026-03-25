@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import ExampleTree from '../components/ExampleTree'
 import ExampleDetailContent from '../components/ExampleDetailContent'
 
 export default function ExamplesPage() {
+  const { t } = useTranslation()
   const { category, id } = useParams<{ category?: string; id?: string }>()
   const navigate = useNavigate()
   const [selectedExample, setSelectedExample] = useState<string | undefined>()
@@ -33,14 +35,14 @@ export default function ExamplesPage() {
         <div className="p-4">
           <div className="flex items-center justify-between">
             <h2 className="text-heading-3">
-              Three.js 示例
+              {t('pages.examples.title')}
             </h2>
             {selectedExample && (
               <button
                 className="btn-icon"
                 onClick={() => setSelectedExample(undefined)}
-                aria-label="清空选择"
-                title="清空选择"
+                aria-label={t('pages.examples.clearSelection')}
+                title={t('pages.examples.clearSelection')}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -95,26 +97,26 @@ export default function ExamplesPage() {
                 </div>
 
                 <h3 className="text-heading-2 mb-3">
-                  选择一个示例
+                  {t('pages.examples.selectPrompt')}
                 </h3>
                 <p className="text-body opacity-80 max-w-lg mx-auto">
-                  从左侧列表中选择一个示例，即可同时查看 3D 预览与可编辑代码；也可以在进度页标记完成。
+                  {t('pages.examples.selectDesc')}
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <Link to="/" className="btn-secondary px-7 py-3">
-                    返回首页
+                    {t('pages.examples.backToHome')}
                   </Link>
                   <Link to="/progress" className="btn-primary px-7 py-3">
-                    查看进度
+                    {t('pages.examples.viewProgress')}
                   </Link>
                 </div>
 
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-                  <span className="tag tag-primary">预览</span>
-                  <span className="tag tag-primary">编辑</span>
-                  <span className="tag tag-primary">分享</span>
-                  <span className="tag tag-success">追踪</span>
+                  <span className="tag tag-primary">{t('pages.examples.tags.preview')}</span>
+                  <span className="tag tag-primary">{t('pages.examples.tags.edit')}</span>
+                  <span className="tag tag-primary">{t('pages.examples.tags.share')}</span>
+                  <span className="tag tag-success">{t('pages.examples.tags.track')}</span>
                 </div>
               </div>
             </div>

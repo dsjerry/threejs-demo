@@ -1,0 +1,237 @@
+{
+  "nav": {
+    "home": "Home",
+    "examples": "Examples",
+    "progress": "Progress",
+    "github": "GitHub",
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Toggle language",
+    "openMenu": "Open menu"
+  },
+  "common": {
+    "notFound": "Example not found",
+    "notFoundDesc": "Please check the URL or select a valid example from the list",
+    "backToExamples": "Back to Examples",
+    "continue": "Continue Learning",
+    "completed": "Completed",
+    "viewed": "Viewed",
+    "total": "Total"
+  },
+  "pages": {
+    "home": {
+      "title": "Three.js Learning Platform",
+      "badge": "Interactive Examples · Live Code · Progress Tracking",
+      "subtitle": "A Three.js learning platform from basics to advanced, with interactive examples and live code editing",
+      "startLearning": "Start Learning",
+      "threejsOfficial": "Three.js Official",
+      "features": {
+        "progressive": {
+          "title": "Progressive Learning",
+          "desc": "Step-by-step learning path from basic geometry to complex scenes"
+        },
+        "realtime": {
+          "title": "Real-time Preview",
+          "desc": "Edit code online and see 3D effects instantly, immediate feedback on learning progress"
+        },
+        "rich": {
+          "title": "Rich Examples",
+          "desc": "Complete examples covering materials, lighting, animation, particles, and more"
+        }
+      },
+      "darkMode": "Dark Mode Support",
+      "smoothAnimations": "Smooth Animations",
+      "quickStart": "Quick Start",
+      "whatIsThreejs": "What is Three.js?",
+      "threejsIntro": "Three.js is a JavaScript 3D graphics library based on WebGL that makes creating and displaying 3D graphics on the web simple. It provides rich APIs for handling geometry, materials, lighting, animation, and all aspects of 3D graphics.",
+      "benefits": {
+        "easyApi": "Easy-to-use API",
+        "crossBrowser": "Cross-browser Compatible",
+        "community": "Active Community Support"
+      },
+      "firstScene": "Your First Three.js Scene"
+    },
+    "examples": {
+      "title": "Three.js Examples",
+      "clearSelection": "Clear selection",
+      "selectPrompt": "Select an Example",
+      "selectDesc": "Choose an example from the list on the left to view the 3D preview and editable code. You can also mark completion on the progress page.",
+      "backToHome": "Back to Home",
+      "viewProgress": "View Progress",
+      "tags": {
+        "preview": "Preview",
+        "edit": "Edit",
+        "share": "Share",
+        "track": "Track"
+      }
+    },
+    "progress": {
+      "title": "Learning Progress",
+      "subtitle": "Track your Three.js learning journey",
+      "overall": "Overall Progress",
+      "overallDesc": "Keep it up! Your learning progress is accumulating",
+      "completion": "Completion",
+      "completionProgress": "Completion Progress",
+      "categoryProgress": "Category Progress",
+      "completed": "Completed",
+      "viewed": "Viewed",
+      "total": "Total"
+    },
+    "detail": {
+      "code": "Code",
+      "readOnly": "Read-only",
+      "editing": "Editing",
+      "readOnlyTip": "Currently read-only, click to switch to editable",
+      "editingTip": "Currently editable, click to switch to read-only"
+    }
+  },
+  "categories": {
+    "basics": "Basic Examples",
+    "materials": "Materials",
+    "lighting": "Lighting",
+    "animation": "Animation",
+    "geometry": "Geometry",
+    "effects": "Post-processing",
+    "interaction": "Interaction",
+    "shaders": "Shaders",
+    "particles": "Particles",
+    "camera": "Camera Controls",
+    "models": "3D Models"
+  },
+  "search": {
+    "placeholder": "Search examples...",
+    "all": "All",
+    "found": "Found {count} matching examples"
+  },
+  "tree": {
+    "title": "Examples",
+    "hint": "Click categories to expand and select an example to preview"
+  },
+  "share": {
+    "share": "Share",
+    "shareLink": "Share Link",
+    "copyCode": "Copy Code",
+    "copied": "Copied to clipboard",
+    "shareExample": "Share example"
+  },
+  "progressTracker": {
+    "viewed": "Viewed",
+    "markComplete": "Mark Complete",
+    "completed": "Completed"
+  },
+  "examples": {
+    "basics": {
+      "cube": {
+        "title": "Rotating Cube",
+        "description": "Create a simple rotating cube and learn basic geometry, materials, and animation"
+      },
+      "sphere": {
+        "title": "Sphere",
+        "description": "Create and render sphere geometry while exploring different material properties"
+      },
+      "plane": {
+        "title": "Plane",
+        "description": "Create plane geometry and learn basic plane rendering"
+      },
+      "materials": {
+        "title": "Materials",
+        "description": "Explore different material types and their properties"
+      }
+    },
+    "lighting": {
+      "demo": {
+        "title": "Lighting Demo",
+        "description": "Learn the effects and configuration of different light types"
+      },
+      "directional": {
+        "title": "Directional Light",
+        "description": "Learn how to use directional light and shadow effects"
+      },
+      "point": {
+        "title": "Point Light",
+        "description": "Learn dynamic lighting effects with point lights"
+      }
+    },
+    "animation": {
+      "demo": {
+        "title": "Animation Demo",
+        "description": "Learn the basic animation system in Three.js"
+      },
+      "movement": {
+        "title": "Movement Animation",
+        "description": "Learn various movement trajectories and path animations"
+      },
+      "scale": {
+        "title": "Scale Animation",
+        "description": "Learn various scaling and transformation animations"
+      }
+    },
+    "materials": {
+      "texture": {
+        "title": "Texture Mapping",
+        "description": "Learn to create and apply procedural textures"
+      },
+      "glass": {
+        "title": "Glass Material",
+        "description": "Learn glass effects in physical materials: transparency, IOR, transmission, and more"
+      }
+    },
+    "particles": {
+      "rain": {
+        "title": "Rain Particles",
+        "description": "Create realistic rain particle system effects"
+      },
+      "stars": {
+        "title": "Star Field",
+        "description": "Create beautiful starry sky and nebula effects"
+      },
+      "fire": {
+        "title": "Fire Particles",
+        "description": "Create realistic fire and burning effects using particle systems"
+      }
+    },
+    "models": {
+      "demo": {
+        "title": "3D Model Showcase",
+        "description": "Display complex 3D geometry combinations and material effects"
+      }
+    },
+    "effects": {
+      "bloom": {
+        "title": "Bloom Effect",
+        "description": "Create beautiful bloom and glow effects with post-processing"
+      },
+      "fog": {
+        "title": "Fog Effect",
+        "description": "Create depth and atmosphere with fog effects"
+      },
+      "depthOfField": {
+        "title": "Depth of Field",
+        "description": "Create DSLR-like depth of field blur effects with post-processing"
+      }
+    },
+    "geometry": {
+      "torusKnot": {
+        "title": "Torus Knot",
+        "description": "Explore complex mathematical surface geometry: the Torus Knot"
+      }
+    },
+    "interaction": {
+      "click": {
+        "title": "Click Interaction",
+        "description": "Learn to implement click and hover interaction effects on objects"
+      }
+    },
+    "shaders": {
+      "custom": {
+        "title": "Custom Shader",
+        "description": "Use GLSL to write custom vertex and fragment shaders for wave effects"
+      }
+    },
+    "camera": {
+      "controls": {
+        "title": "Camera Controls",
+        "description": "Learn OrbitControls: rotate, zoom, and pan operations"
+      }
+    }
+  }
+}

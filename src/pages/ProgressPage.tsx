@@ -1,25 +1,14 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { CheckCircleIcon, EyeIcon, ArrowLeftIcon, BookOpenIcon } from '@heroicons/react/24/outline'
 import { CheckCircleIcon as CheckCircleIconSolid } from '@heroicons/react/24/solid'
 import { useProgress } from '../hooks/useProgress'
-import { examplesData } from '../data/examples'
+import { useExamplesData } from '../data/examples'
 
 export default function ProgressPage() {
+  const { t } = useTranslation()
   const { progress, markAsCompleted, isCompleted, isViewed } = useProgress()
-
-  const categoryTitles: Record<string, string> = {
-    'basics': '基础示例',
-    'materials': '材质系统',
-    'lighting': '光照效果',
-    'animation': '动画效果',
-    'geometry': '几何体',
-    'effects': '后处理效果',
-    'interaction': '交互效果',
-    'shaders': '着色器',
-    'particles': '粒子效果',
-    'camera': '相机控制',
-    'models': '模型展示',
-  }
+  const examplesData = useExamplesData()
 
   const groupedExamples = Object.entries(examplesData).reduce((acc, [key, example]) => {
     const category = example.category
@@ -45,16 +34,16 @@ export default function ProgressPage() {
           className="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-6 transition-colors px-3 py-2 rounded-xl hover:bg-primary-50/70 dark:hover:bg-primary-900/20"
         >
           <ArrowLeftIcon className="w-4 h-4" />
-          <span>返回示例</span>
+          <span>{t('common.backToExamples')}</span>
         </Link>
 
         {/* 页面标题 */}
         <div className="mb-8">
           <h1 className="text-heading-2 mb-2">
-            学习进度
+            {t('pages.progress.title')}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            追踪你的 Three.js 学习旅程
+            {t('pages.progress.subtitle')}
           </p>
         </div>
 
@@ -68,22 +57,22 @@ export default function ProgressPage() {
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                总体进度
+                {t('pages.progress.overall')}
               </h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                继续保持，你的学习进度正在累积
+                {t('pages.progress.overallDesc')}
               </p>
             </div>
             <div className="ml-auto hidden sm:flex items-center gap-2">
-              <span className="tag tag-primary">已完成 {progress.completedExamples.size}</span>
-              <span className="tag tag-primary">已查看 {progress.viewedExamples.size}</span>
+              <span className="tag tag-success">{t('common.completed')} {progress.completedExamples.size}</span>
+              <span className="tag tag-primary">{t('common.viewed')} {progress.viewedExamples.size}</span>
             </div>
           </div>
 
           {/* 进度条 */}
           <div className="mb-6">
             <div className="flex justify-between text-sm mb-2">
-              <span className="text-gray-600 dark:text-gray-400">完成进度</span>
+              <span className="text-gray-600 dark:text-gray-400">{t('pages.progress.completion')}</span>
               <span className="font-semibold text-primary-600 dark:text-primary-400">
                 {progress.completionPercentage}%
               </span>
@@ -104,7 +93,7 @@ export default function ProgressPage() {
               </div>
               <div className="flex items-center justify-center gap-1.5 text-sm text-green-700 dark:text-green-300">
                 <CheckCircleIcon className="w-4 h-4" />
-                已完成
+                {t('common.completed')}
               </div>
             </div>
             <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-800">
@@ -113,7 +102,7 @@ export default function ProgressPage() {
               </div>
               <div className="flex items-center justify-center gap-1.5 text-sm text-blue-700 dark:text-blue-300">
                 <EyeIcon className="w-4 h-4" />
-                已查看
+                {t('common.viewed')}
               </div>
             </div>
             <div className="text-center p-4 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700">
@@ -122,7 +111,7 @@ export default function ProgressPage() {
               </div>
               <div className="flex items-center justify-center gap-1.5 text-sm text-gray-700 dark:text-gray-300">
                 <BookOpenIcon className="w-4 h-4" />
-                总数
+                {t('common.total')}
               </div>
             </div>
           </div>
@@ -130,7 +119,7 @@ export default function ProgressPage() {
 
         {/* 分类进度 */}
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-          分类进度
+          {t('pages.progress.categoryProgress')}
         </h2>
         <div className="space-y-4">
           {Object.entries(groupedExamples).map(([category, examples]) => {
@@ -142,7 +131,7 @@ export default function ProgressPage() {
               <div key={category} className="card-elevated p-4">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-semibold text-gray-900 dark:text-white">
-                    {categoryTitles[category] || category}
+                    {t(`categories.${category}`)}
                   </h3>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     {completedCount}/{total}
@@ -193,7 +182,7 @@ export default function ProgressPage() {
                           <button
                             onClick={() => markAsCompleted(example.key)}
                             className="ml-1 text-xs text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                            title="标记完成"
+                            title={t('progressTracker.markComplete')}
                           >
                             ✓
                           </button>
@@ -213,7 +202,7 @@ export default function ProgressPage() {
             to="/examples"
             className="btn-primary px-6 py-3"
           >
-            继续学习
+            {t('common.continue')}
           </Link>
         </div>
       </div>

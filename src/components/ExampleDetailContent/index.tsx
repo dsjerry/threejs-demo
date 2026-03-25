@@ -1,11 +1,12 @@
 import { Suspense, useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import LoadingSpinner from '../ui/LoadingSpinner'
 import ThreeCanvas from '../ThreeCanvas'
 import CodeEditor from '../CodeEditor'
 import ControlPanel from '../ControlPanel'
 import ProgressTracker from '../ui/ProgressTracker'
 import ShareButton from '../ui/ShareButton'
-import { examplesData } from '../../data/examples'
+import { useExamplesData } from '../../data/examples'
 import { useProgress } from '../../hooks/useProgress'
 import BasicCube from '../examples/BasicCube'
 import BasicSphere from '../examples/BasicSphere'
@@ -62,6 +63,8 @@ interface ExampleDetailContentProps {
 }
 
 export default function ExampleDetailContent({ exampleKey }: ExampleDetailContentProps) {
+  const { t } = useTranslation()
+  const examplesData = useExamplesData()
   const example = examplesData[exampleKey]
   const [code, setCode] = useState(example?.code || '')
   const [controlParams, setControlParams] = useState<any>({})
@@ -86,10 +89,10 @@ export default function ExampleDetailContent({ exampleKey }: ExampleDetailConten
       <div className="h-full flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            示例未找到
+            {t('common.notFound')}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            请检查URL或从左侧列表选择一个有效的示例
+            {t('common.notFoundDesc')}
           </p>
         </div>
       </div>
@@ -166,7 +169,7 @@ export default function ExampleDetailContent({ exampleKey }: ExampleDetailConten
               <svg className="w-4 h-4 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
-              代码
+              {t('pages.detail.code')}
             </h2>
             <div className="flex items-center gap-2">
               <button
@@ -176,7 +179,7 @@ export default function ExampleDetailContent({ exampleKey }: ExampleDetailConten
                     ? 'bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800'
                     : 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800'
                 }`}
-                title={readOnly ? '当前只读，点击切换为可编辑' : '当前可编辑，点击切换为只读'}
+                title={readOnly ? t('pages.detail.readOnlyTip') : t('pages.detail.editingTip')}
               >
                 {readOnly ? (
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -187,7 +190,7 @@ export default function ExampleDetailContent({ exampleKey }: ExampleDetailConten
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                   </svg>
                 )}
-                {readOnly ? '只读' : '编辑'}
+                {readOnly ? t('pages.detail.readOnly') : t('pages.detail.editing')}
               </button>
               <ShareButton exampleKey={exampleKey} code={code} />
             </div>

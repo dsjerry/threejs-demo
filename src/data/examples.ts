@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next'
+
 export interface ExampleData {
   id: string
   title: string
@@ -10,12 +12,10 @@ export interface ExampleData {
   }
 }
 
-export const examplesData: Record<string, ExampleData> = {
-  'basic/cube': {
+const rawExamplesData: Record<string, Omit<ExampleData, 'title' | 'description'>> = {
+  'basics/cube': {
     id: 'cube',
-    title: '旋转立方体',
-    description: '创建一个简单的旋转立方体，学习基础的几何体、材质和动画',
-    category: 'basic',
+    category: 'basics',
     component: 'BasicCube',
     controls: {
       rotationSpeed: { value: 0.5, min: 0, max: 3, step: 0.1 },
@@ -46,11 +46,9 @@ export default function BasicCube() {
   )
 }`
   },
-  'basic/sphere': {
+  'basics/sphere': {
     id: 'sphere',
-    title: '球体',
-    description: '创建和渲染球体几何，学习不同的材质属性',
-    category: 'basic',
+    category: 'basics',
     component: 'BasicSphere',
     code: `import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
@@ -74,11 +72,9 @@ export default function BasicSphere() {
   )
 }`
   },
-  'basic/plane': {
+  'basics/plane': {
     id: 'plane',
-    title: '平面',
-    description: '创建平面几何体，学习基础的平面渲染',
-    category: 'basic',
+    category: 'basics',
     component: 'BasicPlane',
     code: `import { useRef } from 'react'
 import { Mesh } from 'three'
@@ -94,11 +90,9 @@ export default function BasicPlane() {
   )
 }`
   },
-  'basic/materials': {
+  'basics/materials': {
     id: 'materials',
-    title: '材质',
-    description: '探索不同的材质类型和属性',
-    category: 'basic',
+    category: 'basics',
     component: 'BasicMaterials',
     code: `import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
@@ -133,10 +127,8 @@ export default function BasicMaterials() {
   )
 }`
   },
-  'lighting/ambient': {
-    id: 'ambient',
-    title: '环境光',
-    description: '学习环境光的使用和光照效果',
+  'lighting/demo': {
+    id: 'demo',
     category: 'lighting',
     component: 'LightingDemo',
     code: `import { useRef } from 'react'
@@ -154,13 +146,11 @@ export default function LightingDemo() {
 
   return (
     <group ref={groupRef}>
-      {/* 中心球体 */}
       <mesh position={[0, 0, 0]} castShadow receiveShadow>
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial color="#ffffff" roughness={0.3} metalness={0.1} />
       </mesh>
       
-      {/* 环绕的小球体 */}
       {Array.from({ length: 8 }, (_, i) => {
         const angle = (i / 8) * Math.PI * 2
         const radius = 2
@@ -179,13 +169,11 @@ export default function LightingDemo() {
         )
       })}
       
-      {/* 地面 */}
       <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[10, 10]} />
         <meshStandardMaterial color="#444444" />
       </mesh>
       
-      {/* 点光源 */}
       <pointLight 
         position={[0, 3, 0]} 
         intensity={1} 
@@ -198,10 +186,8 @@ export default function LightingDemo() {
   )
 }`
   },
-  'animation/rotation': {
+  'animation/demo': {
     id: 'rotation',
-    title: '旋转动画',
-    description: '学习各种旋转和运动动画效果',
     category: 'animation',
     component: 'AnimationDemo',
     code: `import { useRef } from 'react'
@@ -235,19 +221,16 @@ export default function AnimationDemo() {
 
   return (
     <group ref={groupRef}>
-      {/* 中心旋转立方体 */}
       <mesh ref={cubeRef} position={[0, 0, 0]} castShadow>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="#3b82f6" />
       </mesh>
 
-      {/* 轨道运动球体 */}
       <mesh ref={sphereRef} castShadow>
         <sphereGeometry args={[0.3, 16, 16]} />
         <meshStandardMaterial color="#ef4444" />
       </mesh>
 
-      {/* 静态环形 */}
       {Array.from({ length: 12 }, (_, i) => {
         const angle = (i / 12) * Math.PI * 2
         const radius = 3
@@ -262,7 +245,6 @@ export default function AnimationDemo() {
         )
       })}
 
-      {/* 地面 */}
       <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[8, 8]} />
         <meshStandardMaterial color="#6b7280" />
@@ -273,8 +255,6 @@ export default function AnimationDemo() {
   },
   'lighting/directional': {
     id: 'directional',
-    title: '方向光',
-    description: '学习方向光的使用和阴影效果',
     category: 'lighting',
     component: 'DirectionalLight',
     code: `import { useRef } from 'react'
@@ -292,7 +272,6 @@ export default function DirectionalLight() {
 
   return (
     <group ref={groupRef}>
-      {/* 方向光 */}
       <directionalLight
         position={[5, 5, 5]}
         intensity={1}
@@ -301,10 +280,8 @@ export default function DirectionalLight() {
         shadow-mapSize-height={2048}
       />
       
-      {/* 环境光 */}
       <ambientLight intensity={0.2} />
       
-      {/* 场景物体 */}
       <mesh position={[0, 1, 0]} castShadow receiveShadow>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="#3b82f6" />
@@ -315,7 +292,6 @@ export default function DirectionalLight() {
         <meshStandardMaterial color="#ef4444" />
       </mesh>
       
-      {/* 地面 */}
       <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[20, 20]} />
         <meshStandardMaterial color="#f3f4f6" />
@@ -326,8 +302,6 @@ export default function DirectionalLight() {
   },
   'lighting/point': {
     id: 'point',
-    title: '点光源',
-    description: '学习点光源的动态光照效果',
     category: 'lighting',
     component: 'PointLight',
     code: `import { useRef } from 'react'
@@ -348,7 +322,6 @@ export default function PointLight() {
 
   return (
     <group>
-      {/* 移动的点光源 */}
       <group ref={lightRef}>
         <pointLight intensity={1} distance={10} decay={2} castShadow />
         <mesh>
@@ -357,13 +330,11 @@ export default function PointLight() {
         </mesh>
       </group>
       
-      {/* 场景物体 */}
       <mesh position={[0, 0.5, 0]} castShadow receiveShadow>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="#3b82f6" />
       </mesh>
       
-      {/* 地面 */}
       <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[20, 20]} />
         <meshStandardMaterial color="#f3f4f6" />
@@ -374,8 +345,6 @@ export default function PointLight() {
   },
   'animation/movement': {
     id: 'movement',
-    title: '移动动画',
-    description: '学习各种移动轨迹和路径动画',
     category: 'animation',
     component: 'MovementAnimation',
     code: `import { useRef } from 'react'
@@ -390,19 +359,16 @@ export default function MovementAnimation() {
   useFrame((state) => {
     const time = state.clock.elapsedTime
 
-    // 线性移动
     if (cube1Ref.current) {
       cube1Ref.current.position.x = Math.sin(time) * 3
     }
 
-    // 圆形轨道
     if (cube2Ref.current) {
       cube2Ref.current.position.x = Math.cos(time * 0.8) * 2
       cube2Ref.current.position.z = Math.sin(time * 0.8) * 2
       cube2Ref.current.position.y = 1 + Math.sin(time * 2) * 0.5
     }
 
-    // 8字形轨道
     if (cube3Ref.current) {
       cube3Ref.current.position.x = Math.sin(time * 0.6) * 2.5
       cube3Ref.current.position.z = Math.sin(time * 1.2) * 1.5
@@ -440,8 +406,6 @@ export default function MovementAnimation() {
   },
   'animation/scale': {
     id: 'scale',
-    title: '缩放动画',
-    description: '学习各种缩放和变形动画效果',
     category: 'animation',
     component: 'ScaleAnimation',
     code: `import { useRef } from 'react'
@@ -456,20 +420,17 @@ export default function ScaleAnimation() {
   useFrame((state) => {
     const time = state.clock.elapsedTime
 
-    // 均匀缩放
     if (cube1Ref.current) {
       const scale = 1 + Math.sin(time * 2) * 0.5
       cube1Ref.current.scale.setScalar(scale)
     }
 
-    // 非均匀缩放
     if (cube2Ref.current) {
       cube2Ref.current.scale.x = 1 + Math.sin(time * 1.5) * 0.8
       cube2Ref.current.scale.y = 1 + Math.cos(time * 2) * 0.6
       cube2Ref.current.scale.z = 1 + Math.sin(time * 1.2) * 0.4
     }
 
-    // 脉冲效果
     if (cube3Ref.current) {
       const pulse = Math.abs(Math.sin(time * 4))
       cube3Ref.current.scale.setScalar(0.5 + pulse * 1.5)
@@ -507,8 +468,6 @@ export default function ScaleAnimation() {
   },
   'materials/texture': {
     id: 'texture',
-    title: '纹理贴图',
-    description: '学习程序化纹理的创建和应用',
     category: 'materials',
     component: 'TextureDemo',
     code: `import { useRef } from 'react'
@@ -541,13 +500,11 @@ export default function TextureDemo() {
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={0.8} castShadow />
       
-      {/* 棋盘格纹理立方体 */}
       <mesh ref={cube1Ref} position={[-2, 1, 0]} castShadow>
         <boxGeometry args={[1.5, 1.5, 1.5]} />
         <meshStandardMaterial color="#ffffff" />
       </mesh>
       
-      {/* 渐变纹理球体 */}
       <mesh ref={cube2Ref} position={[2, 1, 0]} castShadow>
         <sphereGeometry args={[0.8, 32, 32]} />
         <meshStandardMaterial color="#4ecdc4" />
@@ -563,8 +520,6 @@ export default function TextureDemo() {
   },
   'particles/rain': {
     id: 'rain',
-    title: '雨滴粒子',
-    description: '创建逼真的雨滴粒子系统效果',
     category: 'particles',
     component: 'RainParticles',
     controls: {
@@ -654,8 +609,6 @@ export default function RainParticles({
   },
   'particles/stars': {
     id: 'stars',
-    title: '星空粒子',
-    description: '创建美丽的星空和星云效果',
     category: 'particles',
     component: 'StarField',
     controls: {
@@ -731,8 +684,6 @@ export default function StarField({
   },
   'models/demo': {
     id: 'demo',
-    title: '3D模型展示',
-    description: '展示复杂3D几何体组合和材质效果',
     category: 'models',
     component: 'ModelDemo',
     controls: {
@@ -782,7 +733,6 @@ export default function ModelDemo({
       />
       <pointLight position={[-10, -10, -5]} intensity={0.3} color="#ff6b6b" />
       
-      {/* 中心球体 */}
       <mesh ref={sphereRef} position={[0, 0, 0]} castShadow receiveShadow>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial 
@@ -793,7 +743,6 @@ export default function ModelDemo({
         />
       </mesh>
       
-      {/* 环绕的圆环 */}
       <group ref={torusRef}>
         <mesh position={[3, 0, 0]} castShadow receiveShadow>
           <torusGeometry args={[0.5, 0.2, 16, 100]} />
@@ -816,7 +765,6 @@ export default function ModelDemo({
         </mesh>
       </group>
       
-      {/* 地面 */}
       <mesh position={[0, -5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[20, 20]} />
         <meshStandardMaterial color="#34495e" roughness={0.8} metalness={0.2} />
@@ -827,8 +775,6 @@ export default function ModelDemo({
   },
   'effects/bloom': {
     id: 'bloom',
-    title: '辉光效果',
-    description: '使用后处理创建美丽的辉光和发光效果',
     category: 'effects',
     component: 'BloomEffect',
     controls: {
@@ -886,14 +832,12 @@ export default function BloomEffect({
       <group ref={groupRef}>
         <ambientLight intensity={0.1} />
         
-        {/* 中心发光球体 */}
         <mesh position={[0, 0, 0]}>
           <sphereGeometry args={[1, 32, 32]} />
           <meshBasicMaterial color="#ffffff" />
           <pointLight position={[0, 0, 0]} intensity={lightIntensity} color="#ffffff" />
         </mesh>
 
-        {/* 轨道发光球体 */}
         <mesh ref={sphere1Ref}>
           <sphereGeometry args={[0.3, 16, 16]} />
           <meshBasicMaterial color="#ff6b6b" />
@@ -913,7 +857,6 @@ export default function BloomEffect({
         </mesh>
       </group>
 
-      {/* 后处理效果 */}
       {enableBloom && (
         <EffectComposer>
           <Bloom
@@ -931,8 +874,6 @@ export default function BloomEffect({
   },
   'geometry/torusKnot': {
     id: 'torusKnot',
-    title: '环面扭结',
-    description: '探索复杂的数学曲面几何体：环面扭结（TorusKnot）',
     category: 'geometry',
     component: 'TorusKnotDemo',
     controls: {
@@ -979,25 +920,21 @@ export default function TorusKnotDemo() {
       <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
       <pointLight position={[-10, -10, -5]} intensity={0.5} color="#4ecdc4" />
 
-      {/* 基础环面结 */}
       <mesh ref={knot1Ref} position={[-4, 0, 0]} castShadow receiveShadow>
         <torusKnotGeometry args={[0.6, 0.2, 128, 32]} />
         <meshStandardMaterial color="#e74c3c" roughness={0.3} metalness={0.7} />
       </mesh>
 
-      {/* 扁平环面结 */}
       <mesh ref={knot2Ref} position={[0, 0, 0]} castShadow receiveShadow>
         <torusKnotGeometry args={[0.8, 0.15, 128, 16, 2, 3]} />
         <meshStandardMaterial color="#3b82f6" roughness={0.2} metalness={0.8} />
       </mesh>
 
-      {/* 细小环面结 */}
       <mesh ref={knot3Ref} position={[4, 0, 0]} castShadow receiveShadow>
         <torusKnotGeometry args={[0.6, 0.08, 200, 32, 3, 5]} />
         <meshStandardMaterial color="#10b981" roughness={0.4} metalness={0.6} />
       </mesh>
 
-      {/* 地面 */}
       <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[20, 20]} />
         <meshStandardMaterial color="#1a1a2e" roughness={0.8} />
@@ -1008,8 +945,6 @@ export default function TorusKnotDemo() {
   },
   'materials/glass': {
     id: 'glass',
-    title: '玻璃材质',
-    description: '学习物理材质中的玻璃效果：透明度、折射率IOR、透射率等',
     category: 'materials',
     component: 'GlassMaterial',
     controls: {
@@ -1057,7 +992,6 @@ export default function GlassMaterial() {
       <pointLight position={[-5, 5, -5]} intensity={1} color="#ff6b6b" />
       <pointLight position={[5, -5, 5]} intensity={0.8} color="#4ecdc4" />
 
-      {/* 高透明玻璃球 */}
       <mesh ref={sphere1Ref} position={[-2.5, 0, 0]} castShadow>
         <sphereGeometry args={[0.7, 64, 64]} />
         <meshPhysicalMaterial
@@ -1072,7 +1006,6 @@ export default function GlassMaterial() {
         />
       </mesh>
 
-      {/* 有色玻璃球 */}
       <mesh ref={sphere2Ref} position={[0, 0, 0]} castShadow>
         <sphereGeometry args={[0.8, 64, 64]} />
         <meshPhysicalMaterial
@@ -1087,7 +1020,6 @@ export default function GlassMaterial() {
         />
       </mesh>
 
-      {/* 彩色玻璃球 */}
       <mesh ref={sphere3Ref} position={[2.5, 0, 0]} castShadow>
         <sphereGeometry args={[0.6, 64, 64]} />
         <meshPhysicalMaterial
@@ -1102,13 +1034,11 @@ export default function GlassMaterial() {
         />
       </mesh>
 
-      {/* 地面 */}
       <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[15, 15]} />
         <meshStandardMaterial color="#2d3748" metalness={0.3} roughness={0.7} />
       </mesh>
 
-      {/* 反射球 */}
       <mesh position={[0, -1.4, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[1.5, 64]} />
         <meshStandardMaterial color="#4a5568" metalness={1} roughness={0} />
@@ -1119,8 +1049,6 @@ export default function GlassMaterial() {
   },
   'effects/fog': {
     id: 'fog',
-    title: '雾效效果',
-    description: '使用雾效创建深度感和大气氛围',
     category: 'effects',
     component: 'FogEffect',
     code: `import { useRef } from 'react'
@@ -1164,7 +1092,6 @@ export default function FogEffect() {
 
   return (
     <group>
-      {/* 指数雾效 */}
       <fog attach="fog" args={['#1a1a2e', 5, 25]} />
 
       <group ref={groupRef}>
@@ -1172,31 +1099,26 @@ export default function FogEffect() {
         <directionalLight position={[10, 10, 5]} intensity={0.8} castShadow />
         <pointLight position={[-10, 5, -10]} intensity={0.5} color="#ff6b6b" />
 
-        {/* 近处的红色立方体 */}
         <mesh ref={cube1Ref} position={[-2, 0.5, 0]} castShadow receiveShadow>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#ff6b6b" roughness={0.4} metalness={0.6} />
         </mesh>
 
-        {/* 中间的绿色立方体 */}
         <mesh ref={cube2Ref} position={[0, 0.5, -2]} castShadow receiveShadow>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#10b981" roughness={0.3} metalness={0.7} />
         </mesh>
 
-        {/* 中间的蓝色立方体 */}
         <mesh ref={cube3Ref} position={[2, 0.5, -1]} castShadow receiveShadow>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#3b82f6" roughness={0.35} metalness={0.65} />
         </mesh>
 
-        {/* 远处的黄色立方体 */}
         <mesh ref={cube4Ref} position={[0, 0.5, -6]} castShadow receiveShadow>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#fbbf24" roughness={0.45} metalness={0.55} />
         </mesh>
 
-        {/* 更远的物体 */}
         {[...Array(6)].map((_, i) => (
           <mesh
             key={\`far-\${i}\`}
@@ -1212,7 +1134,6 @@ export default function FogEffect() {
           </mesh>
         ))}
 
-        {/* 地面 */}
         <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
           <planeGeometry args={[50, 50]} />
           <meshStandardMaterial color="#1e1e2e" roughness={0.9} />
@@ -1224,8 +1145,6 @@ export default function FogEffect() {
   },
   'interaction/click': {
     id: 'click',
-    title: '点击交互',
-    description: '学习物体点击、悬停等交互效果的实现',
     category: 'interaction',
     component: 'ClickInteraction',
     code: `import { useRef, useState } from 'react'
@@ -1270,7 +1189,6 @@ export default function ClickInteraction() {
       <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
       <pointLight position={[-10, -10, -5]} intensity={0.5} color="#ff6b6b" />
 
-      {/* 可点击的立方体网格 */}
       {[...Array(6)].map((_, i) => {
         const row = Math.floor(i / 3)
         const col = i % 3
@@ -1312,13 +1230,11 @@ export default function ClickInteraction() {
         )
       })}
 
-      {/* 中心指示球 */}
       <mesh position={[0, 0, 0]}>
         <sphereGeometry args={[0.15, 32, 32]} />
         <meshBasicMaterial color="#ffffff" />
       </mesh>
 
-      {/* 地面 */}
       <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[15, 15]} />
         <meshStandardMaterial color="#374151" roughness={0.8} metalness={0.2} />
@@ -1329,8 +1245,6 @@ export default function ClickInteraction() {
   },
   'effects/depthOfField': {
     id: 'depthOfField',
-    title: '景深效果',
-    description: '使用后处理创建单反相机般的景深模糊效果',
     category: 'effects',
     component: 'DepthOfFieldEffect',
     code: `import { useRef } from 'react'
@@ -1381,14 +1295,12 @@ export default function DepthOfFieldEffect() {
         <directionalLight position={[10, 10, 5]} intensity={1} castShadow />
         <pointLight position={[0, 0, 0]} intensity={2} color="#ffffff" />
 
-        {/* 焦点物体 */}
         <mesh ref={sphere4Ref} position={[0, 1.5, 0]}>
           <sphereGeometry args={[0.4, 32, 32]} />
           <meshBasicMaterial color="#ffffff" />
           <pointLight intensity={1.5} color="#ffffff" />
         </mesh>
 
-        {/* 轨道上的物体 */}
         <mesh ref={sphere1Ref} position={[5, 0, 0]} castShadow>
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshStandardMaterial color="#ff6b6b" roughness={0.3} metalness={0.7} />
@@ -1404,7 +1316,6 @@ export default function DepthOfFieldEffect() {
           <meshStandardMaterial color="#ffe66d" roughness={0.2} metalness={0.8} />
         </mesh>
 
-        {/* 周围的小圆柱 */}
         {[...Array(8)].map((_, i) => {
           const angle = (i / 8) * Math.PI * 2
           const x = Math.cos(angle) * 7
@@ -1417,14 +1328,12 @@ export default function DepthOfFieldEffect() {
           )
         })}
 
-        {/* 地面 */}
         <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
           <planeGeometry args={[30, 30]} />
           <meshStandardMaterial color="#1a1a2e" roughness={0.8} metalness={0.2} />
         </mesh>
       </group>
 
-      {/* 后处理效果 */}
       <EffectComposer>
         <DepthOfField focusDistance={0.02} focalLength={0.05} bokehScale={8} />
         <Bloom intensity={0.5} luminanceThreshold={0.1} luminanceSmoothing={0.9} />
@@ -1437,8 +1346,6 @@ export default function DepthOfFieldEffect() {
   },
   'shaders/custom': {
     id: 'customShader',
-    title: '自定义着色器',
-    description: '使用 GLSL 编写自定义顶点和片元着色器创建波浪效果',
     category: 'shaders',
     component: 'CustomShader',
     code: `import { useRef, useMemo } from 'react'
@@ -1565,8 +1472,6 @@ function FloatSphere({ angle, radius, index }: { angle: number; radius: number; 
   },
   'particles/fire': {
     id: 'fire',
-    title: '火焰粒子',
-    description: '使用粒子系统创建逼真的火焰燃烧效果',
     category: 'particles',
     component: 'FireParticles',
     code: `import { useRef, useMemo } from 'react'
@@ -1686,8 +1591,6 @@ export default function FireParticles() {
   },
   'camera/controls': {
     id: 'cameraControls',
-    title: '相机控制',
-    description: '学习 OrbitControls 相机的旋转、缩放、平移操作',
     category: 'camera',
     component: 'CameraControls',
     code: `import { useRef } from 'react'
@@ -1781,3 +1684,26 @@ export default function CameraControls() {
 }`
   }
 }
+
+export function useExamplesData(): Record<string, ExampleData> {
+  const { t } = useTranslation()
+  
+  const examplesData: Record<string, ExampleData> = {}
+  
+  Object.entries(rawExamplesData).forEach(([key, data]) => {
+    const translationKey = key.replace('/', '.')
+    examplesData[key] = {
+      ...data,
+      title: t(`examples.${translationKey}.title`),
+      description: t(`examples.${translationKey}.description`)
+    }
+  })
+  
+  return examplesData
+}
+
+export { rawExamplesData }
+
+export const TOTAL_EXAMPLES = Object.keys(rawExamplesData).length
+
+export const getExampleKeys = (): string[] => Object.keys(rawExamplesData)

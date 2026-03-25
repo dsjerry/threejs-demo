@@ -3,7 +3,7 @@ import { Suspense, useState } from 'react'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
 import ThreeCanvas from '../components/ThreeCanvas'
 import CodeEditor from '../components/CodeEditor'
-import { examplesData } from '../data/examples'
+import { rawExamplesData, useExamplesData } from '../data/examples'
 import BasicCube from '../components/examples/BasicCube'
 import BasicSphere from '../components/examples/BasicSphere'
 import BasicPlane from '../components/examples/BasicPlane'
@@ -24,11 +24,13 @@ const componentMap: Record<string, React.ComponentType> = {
 export default function ExampleDetailPage() {
   const { category, id } = useParams<{ category: string; id: string }>()
   const exampleKey = `${category}/${id}`
+  const exampleBase = rawExamplesData[exampleKey]
+  const examplesData = useExamplesData()
   const example = examplesData[exampleKey]
-  
-  const [code, setCode] = useState(example?.code || '')
 
-  if (!example) {
+  const [code, setCode] = useState(exampleBase?.code || '')
+
+  if (!exampleBase) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">

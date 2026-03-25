@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ShareIcon, ClipboardIcon, CheckIcon } from '@heroicons/react/24/outline'
 
 interface ShareButtonProps {
@@ -7,6 +8,7 @@ interface ShareButtonProps {
 }
 
 export default function ShareButton({ exampleKey, code }: ShareButtonProps) {
+  const { t } = useTranslation()
   const [copied, setCopied] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
 
@@ -55,7 +57,7 @@ export default function ShareButton({ exampleKey, code }: ShareButtonProps) {
         className="btn-primary flex items-center gap-2 px-4 py-2 text-sm"
       >
         <ShareIcon className="w-4 h-4" />
-        <span>分享</span>
+        <span>{t('share.share')}</span>
       </button>
 
       {showShareMenu && (
@@ -64,10 +66,10 @@ export default function ShareButton({ exampleKey, code }: ShareButtonProps) {
             <button
               onClick={handleShare}
               className="w-full btn-ghost hover-lift flex items-center gap-2 px-3 py-2.5 text-sm font-medium"
-              title="分享示例"
+              title={t('share.shareExample')}
             >
               <ShareIcon className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-              <span>分享链接</span>
+              <span>{t('share.shareLink')}</span>
             </button>
             
             <div className="h-px bg-gray-200/50 dark:bg-gray-700/50 my-1" />
@@ -79,14 +81,14 @@ export default function ShareButton({ exampleKey, code }: ShareButtonProps) {
                   ? 'text-green-700 dark:text-green-300 bg-green-50/70 dark:bg-green-900/20'
                   : 'text-gray-700 dark:text-gray-200'
               }`}
-              title="复制代码"
+              title={t('share.copyCode')}
             >
               {copied ? (
                 <CheckIcon className="w-4 h-4 animate-bounce-gentle" />
               ) : (
                 <ClipboardIcon className="w-4 h-4" />
               )}
-              <span>{copied ? '已复制到剪贴板' : '复制代码'}</span>
+              <span>{copied ? t('share.copied') : t('share.copyCode')}</span>
             </button>
           </div>
         </div>
